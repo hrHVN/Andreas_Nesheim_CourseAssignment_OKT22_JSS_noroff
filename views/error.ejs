@@ -1,3 +1,21 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<%- include('./utility/header.ejs') %>
+    <title>
+        <%= title %>
+    </title>
+    </head>
+
+    <body>
+
+        <h1>
+            <%= title %>
+        </h1>
+        <h3>
+            <%= message %>
+        </h3>
+        <h2>
+            <%= error.status %>
+        </h2>
+        <pre><%= error.stack %></pre>
+
+
+        <%- include('./utility/footer.ejs') %>

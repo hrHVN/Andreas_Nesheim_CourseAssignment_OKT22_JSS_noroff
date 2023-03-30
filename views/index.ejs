@@ -1,11 +1,31 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+<%- include('./utility/header.ejs') %>
+
+  <title>
+    <%= title %>
+  </title>
   </head>
+
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html>
+
+<%- include('./utility/navigation.ejs') %>
+
+    <h1>
+      <%= title %>
+    </h1>
+    <p>Welcome 
+    </p>
+    <form action="/users/logout" method="post">
+      <button type="submit">Logout</button>
+    </form>
+    <form action="/users" method="get">
+      <button type="submit">Login</button>
+    </form>
+
+
+    <% if (user) { %>
+     <div>
+        <button>Can you see me?</button>
+     </div>
+    <% } %>
+
+    <%- include('./utility/footer.ejs') %>
