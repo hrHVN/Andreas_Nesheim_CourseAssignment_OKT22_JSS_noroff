@@ -1,5 +1,5 @@
 {
-  "name": "jss-ca-2",
+  "name": "Andreas_Nesheim_OKT22_jss-ca",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -20,7 +20,7 @@
     "request": "^2.88.2",
     "socket.io": "^4.6.1"
   },
-  "description": "��#\u0000 \u0000J\u0000a\u0000v\u0000a\u0000S\u0000c\u0000r\u0000i\u0000p\u0000t\u0000 \u0000S\u0000e\u0000r\u0000v\u0000e\u0000r\u0000 \u0000-\u0000 \u0000C\u0000o\u0000u\u0000r\u0000s\u0000e\u0000 \u0000a\u0000s\u0000s\u0000e\u0000s\u0000s\u0000m\u0000e\u0000n\u0000t\u0000 \u00001\u0000",
+  "description": "",
   "main": "app.js",
   "keywords": [],
   "author": "",
