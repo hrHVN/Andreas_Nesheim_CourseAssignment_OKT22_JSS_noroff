@@ -15,10 +15,10 @@ const usersRouter = require('./routes/authenticathe');
 /*
 Global variables
 */
+const JsonStore = require('express-session-json')(session);
 
 // const SQLiteStore = require('connect-sqlite3')(session);
 const app = express();
-const JsonStore = require('express-session-json')(session);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,16 +33,16 @@ app.use(express.static(__dirname + '/node_modules/bootstrap/dist/css'))
 /* 
 session setup
 */
-console.log('before crash')
-
+/*
+  If ther is an error of: ###   SyntaxError: Unexpected end of JSON input   ###
+  Then delete this file -> node_modules\express-session-json\lib\express-sessions.json
+*/
 app.use(session({
   secret: 'temp',
   resave: false,
   saveUninitialized: false,
   store: new JsonStore()
 }))
-
-console.log('After crash?')
 
 app.use(passport.authenticate('session'));
 

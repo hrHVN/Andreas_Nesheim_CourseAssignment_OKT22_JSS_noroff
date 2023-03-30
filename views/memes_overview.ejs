@@ -1,0 +1,44 @@
+<%- include('./utility/header.ejs') %>
+
+  <title>
+    <%= title %>
+  </title>
+  </head>
+
+  <body>
+
+<%- include('./utility/navigation.ejs') %>
+
+<section class="container">
+    <table>
+        <thead>
+            <tr>
+                <td>thumbnail</td>
+                <% if (user) { %>
+                <td>ID</td>
+                <td>URL</td>
+                <td>Name</td>
+                <td>Height</td>
+                <td>Width</td>
+                <% } %>
+            </tr>
+        </thead>
+        <tbody>
+            <% memes.forEach(m => { %>
+            <tr>
+                <td>
+                    <img src=<%= m.url %> alt=<%= m.name %>>
+                </td>
+                <% if (user) { %>
+                    <div>
+                       <button>Details</button>
+                    </div>
+                    <td></td>
+                <% } %>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</section>
+
+<%- include('./utility/footer.ejs') %>
