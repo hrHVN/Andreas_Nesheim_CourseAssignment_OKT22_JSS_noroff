@@ -5,23 +5,28 @@
 <body>
 <%- include('../utility/navigation.ejs') %>
 
-<section class="prompt">
-    <h3> <%= title %> </h3>
+<section class="container prompt">
+    <h3>
+        <%= title %>
+    </h3>
     <h1>Sign in</h1>
-    
-        <form action="/users/login/password" method="post">
-            <section>
-                <label for="username">Username</label>
-                <input id="username" name="username" type="text" autocomplete="username" required autofocus>
-            </section>
-            <section>
-                <label for="password">Password</label>
-                <input id="password" name="password" type="password" autocomplete="password" required>
-            </section>
-            <button type="submit">Sign in</button>
-        </form>
-        <hr>
-        <p class="help">Don't have an account? <a href="/users/signup">Sign up</a></p>
+
+    <form action="/users/login/password" method="post" class="container">
+        <div>
+            <label for="username" class="form-label">Username</label>
+            <input id="username" name="username" type="text" autocomplete="username" class="form-control"
+                required autofocus>
+        </div>
+        <div>
+            <label for="password" class="form-label">Password</label>
+            <input id="password" name="password" type="password" autocomplete="password"
+                class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+    </form>
+    <hr>
+    <p class="help">Don't have an account? <a href="/users/signup">Sign up</a></p>
+
 </section>
 
 <%- include('../utility/footer.ejs') %>

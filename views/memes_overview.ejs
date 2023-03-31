@@ -1,44 +1,50 @@
 <%- include('./utility/header.ejs') %>
 
-  <title>
+<title>
     <%= title %>
-  </title>
-  </head>
+</title>
+</head>
 
-  <body>
+<body>
 
-<%- include('./utility/navigation.ejs') %>
+    <%- include('./utility/navigation.ejs') %>
 
-<section class="container">
-    <table>
-        <thead>
-            <tr>
-                <td>thumbnail</td>
-                <% if (user) { %>
-                <td>ID</td>
-                <td>URL</td>
-                <td>Name</td>
-                <td>Height</td>
-                <td>Width</td>
-                <% } %>
-            </tr>
-        </thead>
-        <tbody>
-            <% memes.forEach(m => { %>
-            <tr>
-                <td>
-                    <img src=<%= m.url %> alt=<%= m.name %>>
-                </td>
-                <% if (user) { %>
-                    <div>
-                       <button>Details</button>
+    <section class="card">
+
+        <% memes.forEach(m=> { %>
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img class="img-fluid" src=<%=m.url %> alt=<%= m.name %>>
+                </div>
+                <% //if (user) { %>
+
+                    <div class="col-md-4 droppdown-menu">
+                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse<%= m.id %>" aria-expanded="false"
+                            aria-controls="collapse<%= m.id %>">Details</button>
+                            
+                            <section class="collapse text-bg-info" id="collapse<%= m.id %>">
+                                <div class="card-body">
+                                    <h5 class="car-title">
+                                        <%= m.name %>
+                                    </h5>
+                                    <p class="card-text">
+                                        <small class="text-body-secondary">URL: <%= m.url %></small>
+                                    </p>
+                                    <p class="card-text">
+                                        ID: <%= m.id %>
+                                    </p>
+                                    <p class="card-text">
+                                        HEIGHT: <%= m.Height %>
+                                        WIDTH: <%= m.width %>
+                                    </p>
+                                </div>
+                            </section>
                     </div>
-                    <td></td>
-                <% } %>
-            </tr>
-            <% }) %>
-        </tbody>
-    </table>
-</section>
+                <% //} %>
+            </div>
+        <% }) %>
+
+    </section>
 
 <%- include('./utility/footer.ejs') %>

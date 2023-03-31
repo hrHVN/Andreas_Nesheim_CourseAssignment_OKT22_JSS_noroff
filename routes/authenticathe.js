@@ -11,10 +11,10 @@ const router = express.Router();
 passport.use(new LocaleStrategy(function verify(username, password, cb) {
     let usersArray = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../lib/db/users.json')));
 
-    let filteredArray = usersArray.filter(usr => usr.userName === username);
+    let filteredArray = usersArray.filter(usr => usr.userName == username);
     if (filteredArray.length > 0) {
         let usersData = filteredArray[0];
-        if (usersData.password === password) return cb(null, usersData);
+        if (usersData.password == password) return cb(null, usersData);
     }
 }))
 

@@ -11,12 +11,11 @@ Routers
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/authenticathe');
 
-
 /*
 Global variables
 */
 const JsonStore = require('express-session-json')(session);
-
+require('dotenv').config()
 // const SQLiteStore = require('connect-sqlite3')(session);
 const app = express();
 
@@ -28,8 +27,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(__dirname + '/node_modules/bootstrap/dist/css'))
-
+app.use(express.static(__dirname+ '/node_modules/bootstrap/dist/'))
+console.log(app.get('env'))
 /* 
 session setup
 */
@@ -38,9 +37,11 @@ session setup
   Then delete this file -> node_modules\express-session-json\lib\express-sessions.json
 */
 app.use(session({
-  secret: 'temp',
+  secret: process.env.SECRET_KEY,
   resave: false,
   saveUninitialized: false,
+  unset: 'destroy',
+  cookie: { maxAge: 1000*60*60*24},
   store: new JsonStore()
 }))
 

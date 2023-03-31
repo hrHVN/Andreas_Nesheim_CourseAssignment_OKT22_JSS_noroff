@@ -4,22 +4,21 @@
     <%= title %>
   </title>
   </head>
-
-  <body>
-
-<%- include('./utility/navigation.ejs') %>
-
-    <h1>
-      <%= title %>
-    </h1>
-    <p>Welcome 
-    </p>
-    <form action="/users/logout" method="post">
-      <button type="submit">Logout</button>
-    </form>
-    <form action="/users" method="get">
-      <button type="submit">Login</button>
-    </form>
-
-
+  
+  <body class="position-relative" data-bs-spy="scroll">
     
+    <%- include('./utility/navigation.ejs') %>
+
+    <section id="home">
+      <div class="container-fluid header-content">
+        <div class="row">
+          <div class="col">
+            <div class="content-box text-center text-light">
+              <h1>Meme Central</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <%- include('./utility/footer.ejs') %>
