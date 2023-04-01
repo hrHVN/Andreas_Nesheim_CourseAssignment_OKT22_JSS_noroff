@@ -1,7 +1,4 @@
-# JavaScript Server - Course assessment 
-
-## Eksternal Librarys used
-## axios 
-- simple ajax-request module for express servers
-## dotenv 
-- for external .env file 
+Axios
+- Easy ajax library for express
+## dotenv
+- global enviorment file for NodeJS with extension .env

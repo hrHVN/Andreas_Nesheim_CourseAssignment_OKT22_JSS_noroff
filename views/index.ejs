@@ -1,15 +1,14 @@
-<%- include('./utility/header.ejs') %>
+<!DOCTYPE html>
+<html lang="en">
 
-  <title>
-    <%= title %>
-  </title>
-  </head>
-  
-  <body class="position-relative" data-bs-spy="scroll">
-    
-    <%- include('./utility/navigation.ejs') %>
+<head>
+  <title>Memes Central</title>
+  <%- include('./partials/head.ejs') %>
+</head>
 
-    <section id="home">
+<body class="position-relative" data-bs-spy="scroll">
+  <%- include('./partials/navbar.ejs') %>
+    <header id="home">
       <div class="container-fluid header-content">
         <div class="row">
           <div class="col">
@@ -19,6 +18,8 @@
           </div>
         </div>
       </div>
-    </section>
+    </header>
+    <%- include('./partials/scripts.ejs') %>
+</body>
 
-    <%- include('./utility/footer.ejs') %>
+</html>
