@@ -1,17 +1,15 @@
 const passport = require('passport')
 const LocaleStrategy = require('passport-local');
-const crypto = require('crypto');
-const db = require('../db');
 const express = require('express');
 const fs = require('fs')
 const path = require('path');
-
 const router = express.Router();
+
 
 passport.use(new LocaleStrategy(function verify(username, password, cb) {
     let usersArray = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../lib/db/users.json')));
 
-    let filteredArray = usersArray.filter(usr => usr.userName == username);
+    let filteredArray = usersArray.filter(usr => usr.username == username);
     if (filteredArray.length > 0) {
         let usersData = filteredArray[0];
         if (usersData.password == password) return cb(null, usersData);
@@ -24,12 +22,25 @@ router.get('/', (req, res) => {
 })
 
 router.get('/signup', function (req, res) {
-    res.render('./users/signup', { title: 'Express', user: req.user });
+    res.render('./users/signup', { title: 'Signup', user: req.user });
 })
 
-router.post('/signup', function (req, res) {
-    console.log('new user added', req.user.username, req.user.password);
-    res.send('Not yet implemented');
+router.post('/signup', function (req, res, next) {
+    let userDb = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../lib/db/users.json')));
+
+    if (userDb.find(x => x.username == req.body.username) === undefined) {
+        // Catch existing user, not case sensetive
+        userDb.push({
+            username: req.body.username,
+            password: req.body.password
+        })
+        console.log('if not:',userDb)
+        fs.writeFileSync(path.resolve(__dirname, '../lib/db/users.json'), JSON.stringify(userDb))
+    }
+    else{
+        res.redirect('/');
+    }
+    res.render('./users/login', { title: 'Memes', user: req.user });
 })
 
 /*
@@ -38,7 +49,7 @@ router.post('/signup', function (req, res) {
 
 router.post('/login/password', passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/users/login'
+    failureRedirect: '/users'
 }));
 
 router.post('/logout', function (req, res, next) {
@@ -59,52 +70,6 @@ passport.deserializeUser(function (user, cb) {
         return cb(null, user);
     });
 });
-/*
-passport.use(new LocaleStrategy(function verify(username, password, cb) {
-    db.get('SELECT * FROM users WHERE username = ?', [username], function (err, row) {
-        if (err) return db(err);
-        if (!row) {
-            return cb(null, false, { message: 'incorrect username or password' });
-        }
-
-        crypto.pbkdf2(password, row.salt, 310000, 32, 'sha256', function (err, hashedPassword) {
-            if (err) return db(err);
-            if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
-                return cb(null, false, { message: 'Incorrect username or password' })
-            }
-            return cd(null, row)
-        })
-    })
-}));
-
-router.get('/signup', function (req, res, next) {
-    res.render('/users/signup');
-})
-
-router.post('/signup', function (req, res, next) {
-    const salt = crypto.randomBytes(16);
-    crypto.pbkdf2(req.body.password, salt, 310000, 32, 'sha256', function (err, hashedPassword) {
-        if (err) return next(err);
-
-        db.run('INSERT INTO users (username, hashed_password, salt) VALUES (?,?,?)', [
-            req.body.username,
-            hashedPassword,
-            salt
-        ], function (err) {
-            if (err) return next(err);
-        });
-        const user = {
-            id: this.lastID,
-            username: req.body.username
-        };
-
-        req.login(user, function (err) {
-            if (err) return next(err);
-            res.redirect('/');
-        });
-    });
-});
 
 
-*/
 module.exports = router;

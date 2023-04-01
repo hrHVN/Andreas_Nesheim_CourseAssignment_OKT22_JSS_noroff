@@ -1,0 +1,35 @@
+<%- include('./utility/header.ejs') %>
+
+    <title>
+        <%= memes.name %>
+    </title>
+    </head>
+
+    <body>
+        <%- include('./utility/navigation.ejs') %>
+           <div class="pt-4"></div>
+
+            <div class="row g-0 border rounded overflow-scroll flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col-md-4 p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary">Meme Details</strong>
+
+                    <h3 class="mb-0">
+                        <%= memes.name %>
+                    </h3>
+                    <p class="text-body-secondary">
+                        <small> ID: <%= memes.id %></small>
+                    </p>
+                    <p class="card-text">
+                        Height: <%= memes.height %>
+                    </p>
+                    <p class="card-text">
+                        Width: <%= memes.width %>
+                    </p>
+                    <a href="/memes" class="stretched-link">Go back</a>
+                </div>
+                <div class="col-md-8 d-lg-block">
+                    <img class="bd-placeholder-img" src="<%= memes.url %>">
+                </div>
+            </div>
+
+            <%- include('./utility/footer.ejs') %>

@@ -1,50 +1,34 @@
 <%- include('./utility/header.ejs') %>
 
-<title>
-    <%= title %>
-</title>
-</head>
+    <title>
+        <%= title %>
+    </title>
+    </head>
 
-<body>
-
-    <%- include('./utility/navigation.ejs') %>
-
-    <section class="card">
-
-        <% memes.forEach(m=> { %>
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img class="img-fluid" src=<%=m.url %> alt=<%= m.name %>>
-                </div>
-                <% //if (user) { %>
-
-                    <div class="col-md-4 droppdown-menu">
-                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapse<%= m.id %>" aria-expanded="false"
-                            aria-controls="collapse<%= m.id %>">Details</button>
-                            
-                            <section class="collapse text-bg-info" id="collapse<%= m.id %>">
-                                <div class="card-body">
-                                    <h5 class="car-title">
-                                        <%= m.name %>
-                                    </h5>
-                                    <p class="card-text">
-                                        <small class="text-body-secondary">URL: <%= m.url %></small>
-                                    </p>
-                                    <p class="card-text">
-                                        ID: <%= m.id %>
-                                    </p>
-                                    <p class="card-text">
-                                        HEIGHT: <%= m.Height %>
-                                        WIDTH: <%= m.width %>
-                                    </p>
+    <body>
+        <%- include('./utility/navigation.ejs') %>
+            <div class="pb-5"></div>
+            <% if (!user) { %>
+                <p>You need to loggin</p>
+                <% } else if (memes.length < 1) {%>
+                    <p>No memes found</p>
+                    <% } else { memes.forEach(m=> { %>
+                        <section class="meme_card pb-3">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <img class="img-fluid" src=<%=m.url %> alt=<%= m.name %>>
                                 </div>
-                            </section>
-                    </div>
-                <% //} %>
-            </div>
-        <% }) %>
+                                <% //if (user) { %>
 
-    </section>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary" type="button"
+                                            onclick="open_new_window(`<%= m.id %>`)">Details</button>
+                                    </div>
 
-<%- include('./utility/footer.ejs') %>
+                                    <% //} %>
+                            </div>
+                            <hr>
+                        </section>
+                        <% }) }%>
+
+                            <%- include('./utility/footer.ejs') %>

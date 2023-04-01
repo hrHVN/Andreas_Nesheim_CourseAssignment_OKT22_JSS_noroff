@@ -4,19 +4,17 @@ const path = require('path');
 const logger = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
+const JsonStore = require('express-session-json')(session);
 
 /*
 Routers
 */
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/authenticathe');
-
 /*
 Global variables
 */
-const JsonStore = require('express-session-json')(session);
 require('dotenv').config()
-// const SQLiteStore = require('connect-sqlite3')(session);
 const app = express();
 
 // view engine setup
@@ -27,24 +25,20 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(__dirname+ '/node_modules/bootstrap/dist/'))
-console.log(app.get('env'))
+app.use(express.static(__dirname + '/node_modules/bootstrap/dist/'))
 /* 
 session setup
 */
-/*
-  If ther is an error of: ###   SyntaxError: Unexpected end of JSON input   ###
-  Then delete this file -> node_modules\express-session-json\lib\express-sessions.json
-*/
+
 app.use(session({
   secret: process.env.SECRET_KEY,
   resave: false,
   saveUninitialized: false,
-  unset: 'destroy',
-  cookie: { maxAge: 1000*60*60*24},
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24,
+  },
   store: new JsonStore()
-}))
-
+}));
 app.use(passport.authenticate('session'));
 
 /*
