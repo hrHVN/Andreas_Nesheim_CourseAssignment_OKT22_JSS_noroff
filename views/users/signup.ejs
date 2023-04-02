@@ -1,0 +1,26 @@
+<%- include('../utility/header.ejs') %>
+<title>Memes - create account</title>
+</head>
+
+<body>
+<%- include('../utility/navigation.ejs') %>
+
+<section class="prompt">
+    <h3>Memes</h3>
+    <h1>Create account</h1>
+    <form class="container" action="/users/signup" method="post">
+        <div>
+            <label for="username">Username</label>
+            <input class="form-control" id="username" name="username" type="text" autocomplete="username" required>
+        </div>
+        <div class="pb-2">
+            <label for="newpassword">Password</label>
+            <input class="form-control" id="newpassword" name="password" type="password" autocomplete="password" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Create</button>
+    </form>
+    <hr>
+    <p class="help">Already have an account? <a href="/users">Sign in</a></p>
+</section>
+
+<%- include('../utility/footer.ejs') %>
