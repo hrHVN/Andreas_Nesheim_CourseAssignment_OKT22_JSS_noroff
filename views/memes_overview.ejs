@@ -8,7 +8,7 @@
     <body>
         <%- include('./utility/navigation.ejs') %>
             <div class="pb-5"></div>
-            <%  if (memes.length < 1) {%>
+            <%  if ((memes.length < 1 && !user) || (memes.length < 1 && user)) {%>
                     <p>No memes found</p>
                     <% } else { memes.forEach(m=> { %>
                         <section class="meme_card pb-3">
